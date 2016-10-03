@@ -1,0 +1,20 @@
+{
+  "name": "es1",
+  "author": "Innocenzo Biondo",
+  "private": true,
+  "version": "0.0.0",
+  "dependencies": {
+    "express"        : "^4.13.4",
+    "morgan"         : "^1.1.1",
+    "path"           : "*"
+  },
+  "scripts": {
+    "start": "node server.js"
+  },
+  "description": "Realizzare una semplice applicazione web basata su nodejs (no database).
+E’ richiesta la realizzazione di una vetrina di prodotti software (es. Win Office, Win 8, Win 10, ecc.).
+Moduli: Express, Angularjs",
+  "repository": {
+    "type": "git"
+  }
+}
