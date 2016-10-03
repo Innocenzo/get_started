@@ -1,0 +1,31 @@
+[
+    {
+        "age": 0,
+        "id": "xxxx1",
+        "imageUrl": "img/win10.png",
+        "name": "Windows 10",
+        "snippet": "Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua."
+    },
+    {
+        "age": 1,
+        "id": "xxxx2",
+        "imageUrl": "img/win9.png",
+        "name": "Windows 9",
+        "snippet": "Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat."
+    },
+    {
+        "age": 2,
+        "carrier": "Windows",
+        "id": "xxxx3",
+        "imageUrl": "img/win8.png",
+        "name": "Windows 8",
+        "snippet": "Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur."
+    },
+    {
+        "age": 3,
+        "id": "xxxx14",
+        "imageUrl": "img/win7.png",
+        "name": "Windows 7",
+        "snippet": "Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum."
+    }
+]
