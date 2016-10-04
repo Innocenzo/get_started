@@ -13,6 +13,21 @@ router.get("/contacts", function(req, res) {
   models.Contact.findAll().then(function(contacts){
       res.json(contacts);
   });
+
+  router.post("/contacts", function(req, res) {
+    console.log("routes");
+    console.log(req.body);
+    models.Contact.create({
+        name: req.body.text,
+        surname: req.body.text,
+        tel: req.body.text
+    }).then(function(contacts){
+        res.json(contacts.dataValues);
+    }).catch(function(error){
+        console.log("ops: " + error);
+        res.status(500).json({ error: 'error' });
+    });
+    });
   // res.render("index");
   // User.find()
   // .sort({ createdAt: "descending" })
