@@ -11,9 +11,7 @@
   "scripts": {
     "start": "node server.js"
   },
-  "description": "Realizzare una semplice applicazione web basata su nodejs (no database).
-E’ richiesta la realizzazione di una vetrina di prodotti software (es. Win Office, Win 8, Win 10, ecc.).
-Moduli: Express, Angularjs",
+  "description": "Realizzare una semplice applicazione web basata su nodejs (no database).E richiesta la realizzazione di una vetrina di prodotti software (es. Win Office, Win 8, Win 10, ecc.). Moduli: Express, Angularjs",
   "repository": {
     "type": "git"
   }

@@ -4,12 +4,16 @@ var express = require("express");
 // var User = require("./models/user");
 var router = express.Router();
 
-
-router.get("/", function(req, res, next) {
-  // models.Contact.findAll().then(function(contacts){
-  //     res.json(contacts);
-  // });
-  res.render("index");
+router.get("/", function(req, res) {
+  res.render('index', {
+      title : 'es2'
+  });
+  });
+router.get("/contacts", function(req, res) {
+  models.Contact.findAll().then(function(contacts){
+      res.json(contacts);
+  });
+  // res.render("index");
   // User.find()
   // .sort({ createdAt: "descending" })
   // .exec(function(err, users) {
@@ -17,6 +21,7 @@ router.get("/", function(req, res, next) {
   //   res.render("index", { users: users });
   // });
 });
+
 
 // router.get("/login", function(req, res) {
 //   res.render("login");

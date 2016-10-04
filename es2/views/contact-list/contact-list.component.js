@@ -8,8 +8,12 @@ angular.
       function ContactListController($http) {
         var self = this;
         self.orderProp = 'name';
-        $http.get('contacts/contacts.json').then(function(response) {
-          self.contacts = response.data;
+        $http.get("/contacts").success(function(data, status, headers, config) {
+          // $scope.contacts = data;
+          console.log(data);
+          self.contacts = data;
+        }).error(function(data, status, headers, config) {
+            console.log("Ops: could not get any data");
         });
       }
     ]
