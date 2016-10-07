@@ -11,25 +11,25 @@ var router = express.Router();
 //   });
 router.get("/api/contacts", function(req, res) {
   models.Contact.findAll().then(function(contacts){
-      res.json(contacts);
+    res.json(contacts);
   });
 });
 
-//
-//   router.post("/contacts", function(req, res) {
-//     console.log("routes");
-//     console.log(req.body);
-//     models.Contact.create({
-//         name: req.body.text,
-//         surname: req.body.text,
-//         tel: req.body.text
-//     }).then(function(contacts){
-//         res.json(contacts.dataValues);
-//     }).catch(function(error){
-//         console.log("ops: " + error);
-//         res.status(500).json({ error: 'error' });
-//     });
-//     });
-//
-// });
+router.post("/api/contacts", function(req, res) {
+  // console.log("routes");
+  console.log(req.body+"hhfhjfjhfhjfhfhj");
+
+  models.Contact.create({
+    name: req.body.name,
+    surname: req.body.surname,
+    tel: req.body.tel
+  }).then(function(contact){
+    console.log(req.body+"hhfhjfjhfhjfhfhj");
+    console.log(contacts);
+    res.json(contact);
+  }).catch(function(error){
+    console.log("ops: " + error);
+    res.status(500).json({ error: 'error' });
+  });
+});
 module.exports = router;

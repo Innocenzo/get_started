@@ -14,12 +14,14 @@
     <tbody>
       <tr>
         <th>#</th>
-        <form ng-submit="">
-        <th><input ng-model="contactName" class="form-control" type="text" placeholder="First Name" id="example-text-input"></th>
-        <th><input ng-model="contactSurname" class="form-control" type="text" placeholder="Last Name" id="example-text-input"></th>
-        <th><input ng-model="contactTel" class="form-control" type="tel" placeholder="1-(555)-555-5555" id="example-tel-input"></th>
-        <th><button  type="submit" class="btn btn-primary btn-lg btn-block">Add Contact</button></th>
+        <!-- use ng-submit to catch the form submission and use our Angular function -->
+        <form >
+        <th><input class="form-control" type="text" placeholder="First Name" ng-model="formData.name"></th>
+        <th><input class="form-control" type="text" placeholder="Last Name" ng-model="formData.surname"></th>
+        <th><input class="form-control" type="text" placeholder="1-(555)-555-5555" ng-model="formData.tel"></th>
+        <th><button type="submit" class="btn btn-primary btn-lg btn-block" ng-click="SendData()">Add Contact</button></th>
         </form>
+        {{formData}}
       </tr>
         <tr ng-repeat="contact in contacts">
           <th scope="row">{{contact.id}}</th>
