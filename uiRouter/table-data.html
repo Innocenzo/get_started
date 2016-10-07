@@ -1,0 +1,17 @@
+<!-- table-data.html -->
+<table class="table table-bordered">
+  <thead>
+    <tr>
+      <th>#</th>
+      <th>Name</th>
+      <th>Price</th>
+    </tr>
+  </thead>
+  <tbody>
+      <tr ng-repeat="scotch in scotches">
+      <th scope="row">#</th>
+      <td>{{scotch.name}}</td>
+      <td>{{scotch.price}}</td>
+    </tr>
+  </tbody>
+</table>
