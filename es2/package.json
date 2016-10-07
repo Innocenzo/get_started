@@ -8,7 +8,7 @@
     "ejs": "*"
   },
   "scripts": {
-    "start": "node app"
+    "start": "node server"
   },
   "description": "ee",
   "main": "---.js",

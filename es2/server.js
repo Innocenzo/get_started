@@ -12,8 +12,10 @@ var app = express();
 // setUpPassport();
 
 app.set('port', process.env.PORT || 3000);
-app.set('views', __dirname + '/views');
-app.set('view engine', 'ejs');
+
+// configure app
+app.use(bodyParser());
+
 
 
 app.use(express.static(path.join(__dirname, "public")));

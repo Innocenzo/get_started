@@ -1,0 +1,37 @@
+<!-- partial-home-list.html -->
+
+<ul>
+  <table class="table table-bordered">
+    <thead>
+      <tr>
+        <th>#</th>
+        <th>First Name</th>
+        <th>Last Name</th>
+        <th>Tel</th>
+        <th>Edit</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <th>#</th>
+        <form ng-submit="">
+        <th><input ng-model="contactName" class="form-control" type="text" placeholder="First Name" id="example-text-input"></th>
+        <th><input ng-model="contactSurname" class="form-control" type="text" placeholder="Last Name" id="example-text-input"></th>
+        <th><input ng-model="contactTel" class="form-control" type="tel" placeholder="1-(555)-555-5555" id="example-tel-input"></th>
+        <th><button  type="submit" class="btn btn-primary btn-lg btn-block">Add Contact</button></th>
+        </form>
+      </tr>
+        <tr ng-repeat="contact in contacts">
+          <th scope="row">{{contact.id}}</th>
+          <td>{{contact.name}}</td>
+          <td>{{contact.surname}}</td>
+          <td>{{contact.tel}}</td>
+          <td>
+            <button type="button" class="btn btn-success">Update</button>
+            <button type="button" class="btn btn-danger">Remove</button>
+          </td>
+      </tr>
+    </tbody>
+  </table>
+
+</ul>

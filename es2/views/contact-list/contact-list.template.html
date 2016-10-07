@@ -37,7 +37,7 @@
             <th><input ng-model="contactTel" class="form-control" type="tel" placeholder="1-(555)-555-5555" id="example-tel-input"></th>
             <th><button  type="submit" class="btn btn-primary btn-lg btn-block">Add Contact</button></th>
             </form> -->
-            <form ng-submit="sendData()">
+            <form ng-submit="$ctrl.sendData()">
               Enter text and hit enter:
               <input type="text" ng-model="$ctrl.text" name="text" />
               <input type="submit" id="submit" value="Submit" />
