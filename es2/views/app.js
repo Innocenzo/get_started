@@ -17,11 +17,12 @@ routerApp.config(function($stateProvider, $urlRouterProvider) {
     templateUrl: 'partial-home-list.html',
     controller: ['$scope','$http',
     function ContactListController($scope,$http) {
+      $scope.orderProp = "name";
       // we will store all of our form data in this object
       $scope.formData = {};
       $scope.SendData = function () {
         var data ={
-          name:    $scope.formData.name,
+          name1:    $scope.formData.name,
           surname: $scope.formData.surname,
           tel: $scope.formData.tel
         };
@@ -33,7 +34,7 @@ routerApp.config(function($stateProvider, $urlRouterProvider) {
         }).catch(function(response) {
           console.error('Gists error', response.status, response.data);
         });
-      };  
+      };
       $http.get("/api/contacts").then(function(response) {
         // $scope.contacts = data;
         console.log(response);
