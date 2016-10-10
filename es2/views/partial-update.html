@@ -1,0 +1,37 @@
+<!-- partial-update.html -->
+<div class="container-fluid">
+  <div class="row">
+    <div class="col-md-2">
+    </div>
+    <div class="col-md-10">
+
+      <table class="table table-bordered">
+        <thead>
+          <tr>
+            <th>#</th>
+            <th>First Name</th>
+            <th>Last Name</th>
+            <th>Tel</th>
+            <th>Edit</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <th>#</th>
+            <!-- use ng-submit to catch the form submission and use our Angular function -->
+            <form >
+              <th><input class="form-control" type="text" placeholder="First Name" ng-model="formDataU.name"></th>
+              <th><input class="form-control" type="text" placeholder="Last Name" ng-model="formDataU.surname"></th>
+              <th><input class="form-control" type="text" placeholder="1-(555)-555-5555" ng-model="formDataU.tel"></th>
+              <th><button ui-sref="home.contacts" type="submit" class="btn btn-success btn-lg btn-block" ng-click="UpdateId()">Update Contact</button></th>
+            </form>
+            {{formData}}
+          </tr>
+
+        </tbody>
+      </table>
+
+
+    </div>
+  </div>
+</div>
