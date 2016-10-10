@@ -45,5 +45,19 @@ router.put("/api/contacts/:id", function(req, res) {
 });
 });
 
+router.delete("/api/contacts/:id", function(req, res) {
+  console.log("delete");
+  console.log(req.params.id);
+  models.Contact.findById(req.params.id).then(function(contact) {
+     console.log(contact);
+     contact.destroy().then(function(contact){
+       res.send('DELETE');
+     }).catch(function(error){
+       console.log("ops: " + error);
+       res.status(500).json({ error: 'error' });
+     });
+});
+});
+
 
 module.exports = router;

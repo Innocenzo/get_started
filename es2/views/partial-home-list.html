@@ -49,7 +49,7 @@
             <td>{{contact.tel}}</td>
             <td>
               <a ui-sref="home.contact({ ID: {{contact.id}} })" class="btn btn-success">Update</a>
-              <button type="button" class="btn btn-danger">Remove</button>
+              <button ng-click="RemoveId(contact.id)" type="button" class="btn btn-danger">Remove</button>
             </td>
           </tr>
           <div ui-view></div>
