@@ -93,8 +93,8 @@ routerApp.config(function($stateProvider, $urlRouterProvider) {
         UpdateContact.update(data)
                       .$promise
                       .then(function(res){
-                        console.log(res);
-                        $scope.contacts[res.id] = res;
+                        console.log(JSON.stringify(res)+"update response");
+                        // $scope.contacts[res.id] = res;
                       }).catch(function(response) {
                         console.error('Gists error', response, response.data);
                       });
