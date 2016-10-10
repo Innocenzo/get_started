@@ -16,6 +16,14 @@ routerApp.factory('AddContact',['$resource', function($resource) {
   });
 }]);
 
+routerApp.factory('UpdateContact',['$resource', function($resource) {
+  return $resource('/api/contacts/:id', {id: '@id'}, {
+    update: {
+      method: 'PUT'
+    }
+  });
+}]);
+
 routerApp.config(function($stateProvider, $urlRouterProvider) {
 
   $urlRouterProvider.otherwise('/home');
@@ -30,17 +38,17 @@ routerApp.config(function($stateProvider, $urlRouterProvider) {
   .state('home.contacts', {
     url: '/contacts',
     templateUrl: 'partial-home-list.html',
-    controller: ['$scope','$http','ListContact','AddContact',
-    function ContactListController($scope,$http,ListContact,AddContact) {
-      $scope.orderProp = "name";
+    controller: ['$scope','ListContact','AddContact',
+    function ContactListController($scope,ListContact,AddContact) {
+      $scope.orderProp = "id";
       // we will store all of our form data in this object
       $scope.formData = {};
       $scope.SendData = function () {
 
         var data = {
           name1:    $scope.formData.name,
-          surname: $scope.formData.surname,
-          tel: $scope.formData.tel
+          surname:  $scope.formData.surname,
+          tel:      $scope.formData.tel
         };
         console.log(data);
         return AddContact
@@ -65,6 +73,33 @@ routerApp.config(function($stateProvider, $urlRouterProvider) {
                 });
     }
   ]
+})
+
+.state('home.contact', {
+    url: '/contact/:ID',
+    templateUrl: 'partial-update.html',
+    controller: ['$scope','$stateParams','UpdateContact',
+    function UpdateContactController($scope,$stateParams,UpdateContact) {
+      $scope.UpdateId = function () {
+        var id = $stateParams.ID;
+        var data = {
+          id: $stateParams.ID,
+          name:    $scope.formDataU.name,
+          surname:  $scope.formDataU.surname,
+          tel:      $scope.formDataU.tel
+        };
+        console.log(id);
+        console.log(data);
+        UpdateContact.update(data)
+                      .$promise
+                      .then(function(res){
+                        console.log(res);
+                        $scope.contacts[res.id] = res;
+                      }).catch(function(response) {
+                        console.error('Gists error', response, response.data);
+                      });
+      };
+    }]
 });
 
 

@@ -48,10 +48,12 @@
             <td>{{contact.surname}}</td>
             <td>{{contact.tel}}</td>
             <td>
-              <button type="button" class="btn btn-success">Update</button>
+              <a ui-sref="home.contact({ ID: {{contact.id}} })" class="btn btn-success">Update</a>
               <button type="button" class="btn btn-danger">Remove</button>
             </td>
           </tr>
+          <div ui-view></div>
+
         </tbody>
       </table>
 

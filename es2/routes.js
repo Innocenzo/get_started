@@ -32,8 +32,11 @@ router.put("/api/contacts/:id", function(req, res) {
     var prop;
      for(prop in req.body){
           contact[prop]=req.body[prop];
+          console.log(prop+"      "+req.body[prop]);
+
      }
-     contact.update().then(function(contact){
+     console.log(contact.dataValues);
+     contact.save().then(function(contact){
        res.json(contact);
      }).catch(function(error){
        console.log("ops: " + error);
