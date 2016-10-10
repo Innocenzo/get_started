@@ -1,14 +1,8 @@
 var models  = require('./models');
 var express = require("express");
 
-// var User = require("./models/user");
 var router = express.Router();
 
-// router.get("/", function(req, res) {
-//   res.render('index', {
-//       title : 'es2'
-//   });
-//   });
 router.get("/api/contacts", function(req, res) {
   models.Contact.findAll().then(function(contacts){
     res.json(contacts);
@@ -17,8 +11,6 @@ router.get("/api/contacts", function(req, res) {
 
 router.post("/api/contacts", function(req, res) {
   // console.log("routes");
-  console.log(req.body+"hhfhjfjhfhjfhfhj");
-  console.log(req.body.name1+"nome");
   models.Contact.create({
     name: req.body.name1,
     surname: req.body.surname,
@@ -31,6 +23,23 @@ router.post("/api/contacts", function(req, res) {
     console.log("ops: " + error);
     res.status(500).json({ error: 'error' });
   });
+});
+
+router.put("/api/contacts/:id", function(req, res) {
+  console.log("put");
+  console.log(req.params.id);
+  models.Contact.findById(req.params.id).then(function(contact) {
+    var prop;
+     for(prop in req.body){
+          contact[prop]=req.body[prop];
+     }
+     contact.update().then(function(contact){
+       res.json(contact);
+     }).catch(function(error){
+       console.log("ops: " + error);
+       res.status(500).json({ error: 'error' });
+     });
+});
 });
 
 
