@@ -1,0 +1,63 @@
+<!-- partial-home-list.html -->
+<div class="container-fluid">
+  <div class="row">
+    <div class="col-md-2">
+      <!-- Sidebar content -->
+      <p>
+        Search:
+        <input class="form-control" ng-model="query">
+      </p>
+
+      <p>
+        Sort by:
+        <select  class="form-control" ng-model="orderProp">
+          <option value="name">Name</option>
+          <option value="surname">Surname</option>
+          <option value="id">Id</option>
+        </select>
+      </p>
+
+    </div>
+    <div class="col-md-10">
+
+      <table class="table table-bordered">
+        <thead>
+          <tr>
+            <th>#</th>
+            <th>First Name</th>
+            <th>Last Name</th>
+            <th>Tel</th>
+            <th>Edit</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <th>#</th>
+            <!-- use ng-submit to catch the form submission and use our Angular function -->
+            <form >
+              <th><input class="form-control" type="text" placeholder="First Name" ng-model="formData.name"></th>
+              <th><input class="form-control" type="text" placeholder="Last Name" ng-model="formData.surname"></th>
+              <th><input class="form-control" type="text" placeholder="1-(555)-555-5555" ng-model="formData.tel"></th>
+              <th><button type="submit" class="btn btn-primary btn-lg btn-block" ng-click="SendData()">Add Contact</button></th>
+            </form>
+            {{formData}}
+          </tr>
+          <tr ng-repeat="contact in contacts | filter:query | orderBy:orderProp">
+            <th scope="row">{{contact.id}}</th>
+            <td>{{contact.name}}</td>
+            <td>{{contact.surname}}</td>
+            <td>{{contact.tel}}</td>
+            <td>
+              <a ui-sref="home.contact({ ID: {{contact.id}} })" class="btn btn-success">Update</a>
+              <button ng-click="RemoveId(contact.id)" type="button" class="btn btn-danger">Remove</button>
+            </td>
+          </tr>
+          <div ui-view></div>
+
+        </tbody>
+      </table>
+
+
+    </div>
+  </div>
+</div>

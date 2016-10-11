@@ -1,0 +1,19 @@
+{
+  "name": "es",
+  "author": "Innocenzo Biondo",
+  "private": true,
+  "version": "0.0.0",
+  "dependencies": {
+    "express"        : "^4.13.4",
+    "ejs": "*"
+  },
+  "scripts": {
+    "start": "nodemon server"
+  },
+  "description": "ee",
+  "main": "---.js",
+  "repository": {
+    "type": "git",
+    "url": "ee"
+  }
+}
