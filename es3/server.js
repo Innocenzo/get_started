@@ -1,31 +1,42 @@
 var bodyParser = require("body-parser");
+var cookieParser = require("cookie-parser");
 var express = require("express");
+var flash = require("connect-flash");
+var passport = require("passport");
 var path = require("path");
+var session = require("express-session");
 var http = require('http');
-//var methodOverride = require('method-override');
+
+var setUpPassport = require("./setuppassport");
 
 var models = require("./models");
 var routes = require("./routes");
 
 var app = express();
 // mongoose.connect("mongodb://localhost:27017/test");
-// setUpPassport();
+setUpPassport();
 
 app.set('port', process.env.PORT || 3000);
 
 // configure app
-app.use(bodyParser());
-
-
-
 app.use(express.static(path.join(__dirname, "public")));
 app.use(express.static(path.join(__dirname, "views")));
 
+app.use(bodyParser());
+app.use(cookieParser());
+
+app.use(session({
+  secret: "LUp$Dg?,I#i&owP3=9su+OB%`JgL4muLF5YJ~{;t",
+  resave: true,
+  saveUninitialized: true
+}));
+
+app.use(flash());
+
+app.use(passport.initialize());
+app.use(passport.session());
 
 app.use(routes);
-// app.get('/', routes.index);
-// app.get('/contacts', routes.getcontacts);
-
 
 models.sequelize.sync().then(function() {
     http.createServer(app).listen(app.get('port'), function() {

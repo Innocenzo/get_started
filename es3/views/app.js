@@ -17,8 +17,15 @@ $stateProvider
 .state('home', {
   url: '/home',
   templateUrl: 'partial-home.html'
+}).
+state('signup', {
+  url: '/signup',
+  templateUrl: 'partial-signup.html'
+}).
+state('signin', {
+  url: '/signin',
+  templateUrl: 'partial-login.html'
 })
-// nested list with custom controller
 .state('home.contacts', {
   url: '/contacts',
   templateUrl: 'partial-home-list.html',
