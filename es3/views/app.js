@@ -30,8 +30,8 @@ $stateProvider
 .state('logout', {
   url: '/logout',
   templateUrl: 'logout.html',
-  controller : ['$scope','Logout',
-  function LoginController($scope,Logout) {
+  controller : ['$scope','Logout','$location',
+  function LoginController($scope,Logout,$location) {
     $scope.Logout = function () {
       return    Logout
                       .get()
@@ -39,6 +39,7 @@ $stateProvider
                       .then(function(res){
                         console.log('logout ok');
                         console.log(res);
+                        $location.path('/');
                         //res.redirect("/");
                         // $scope.contacts.push(res);
                       }).catch(function(response) {
@@ -50,8 +51,8 @@ $stateProvider
 state('signup', {
   url: '/signup',
   templateUrl: 'partial-signup.html',
-  controller : ['$scope','Signup',
-  function SignupController($scope,Signup) {
+  controller : ['$scope','$location','Signup',
+  function SignupController($scope,$location,Signup) {
     $scope.Signup = function () {
       var data = {
         username:  $scope.formDataS.email,
@@ -63,6 +64,7 @@ state('signup', {
                       .$promise
                       .then(function(res){
                         console.log("signup OK");
+                        $location.path('/');
                         // res.redirect("/");
                         // $scope.contacts.push(res);
                       }).catch(function(response) {
@@ -74,8 +76,8 @@ state('signup', {
 state('login', {
   url: '/login',
   templateUrl: 'partial-login.html',
-  controller : ['$scope','Login',
-  function LoginController($scope,Login) {
+  controller : ['$scope','Login','$location',
+  function LoginController($scope,Login,$location) {
     $scope.Login = function () {
       var data = {
         username:  $scope.formDataL.email,
@@ -88,6 +90,9 @@ state('login', {
                       .then(function(res){
                         console.log('login ok');
                         console.log(res);
+                        var urlUser = res.uuid;
+                        console.log(urlUser);
+                        $location.path(urlUser);
                         //res.redirect("/");
                         // $scope.contacts.push(res);
                       }).catch(function(response) {

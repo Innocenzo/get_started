@@ -67,7 +67,7 @@ router.delete("/api/contacts/:id", function(req, res) {
 router.get("/api/logout", function(req, res) {
   console.log('ok');
 req.logout();
-res.redirect("/");
+res.status(200).end("logout");
 });
 
 
@@ -110,9 +110,10 @@ router.post("/api/signup", function(req, res) {
                   username: req.body.username,
                   password: password
                 }).then(function(contact){
-                  console.log(req.body);
+                  console.log(req.body,'signup');
                   // console.log(contact.dataValues);
-                  return res.redirect("/");
+                  res.status(200).end("signup");
+                  // return;
                 }).catch(function(error){
                   console.log("ops: " + error);
                   res.status(500).json({ error: 'error' });
