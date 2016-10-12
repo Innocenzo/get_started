@@ -7,6 +7,15 @@ return $resource('/api/contacts/:id', {id: '@id'}, {
   }
 });
 }]);
+routerApp.factory('Signup',['$resource', function($resource) {
+return $resource('/api/signup');
+}]);
+routerApp.factory('Login',['$resource', function($resource) {
+return $resource('/api/login');
+}]);
+routerApp.factory('Logout',['$resource', function($resource) {
+return $resource('/api/logout');
+}]);
 
 routerApp.config(function($stateProvider, $urlRouterProvider) {
 
@@ -16,15 +25,76 @@ $stateProvider
 // HOME STATES AND NESTED VIEWS ========================================
 .state('home', {
   url: '/home',
-  templateUrl: 'partial-home.html'
+  templateUrl: 'partial-home.html',
+})
+.state('logout', {
+  url: '/logout',
+  templateUrl: 'logout.html',
+  controller : ['$scope','Logout',
+  function LoginController($scope,Logout) {
+    $scope.Logout = function () {
+      return    Logout
+                      .get()
+                      .$promise
+                      .then(function(res){
+                        console.log('logout ok');
+                        console.log(res);
+                        //res.redirect("/");
+                        // $scope.contacts.push(res);
+                      }).catch(function(response) {
+                        console.error('Gists error', response, response.data);
+                      });
+    };
+  }]
 }).
 state('signup', {
   url: '/signup',
-  templateUrl: 'partial-signup.html'
+  templateUrl: 'partial-signup.html',
+  controller : ['$scope','Signup',
+  function SignupController($scope,Signup) {
+    $scope.Signup = function () {
+      var data = {
+        username:  $scope.formDataS.email,
+        password:  $scope.formDataS.password
+      };
+      console.log(data+"signup");
+      return    Signup
+                      .save(data)
+                      .$promise
+                      .then(function(res){
+                        console.log("signup OK");
+                        // res.redirect("/");
+                        // $scope.contacts.push(res);
+                      }).catch(function(response) {
+                        console.error('Gists error', response, response.data);
+                      });
+    };
+  }]
 }).
-state('signin', {
-  url: '/signin',
-  templateUrl: 'partial-login.html'
+state('login', {
+  url: '/login',
+  templateUrl: 'partial-login.html',
+  controller : ['$scope','Login',
+  function LoginController($scope,Login) {
+    $scope.Login = function () {
+      var data = {
+        username:  $scope.formDataL.email,
+        password:  $scope.formDataL.password
+      };
+      console.log(data);
+      return    Login
+                      .save(data)
+                      .$promise
+                      .then(function(res){
+                        console.log('login ok');
+                        console.log(res);
+                        //res.redirect("/");
+                        // $scope.contacts.push(res);
+                      }).catch(function(response) {
+                        console.error('Gists error', response, response.data);
+                      });
+    };
+  }]
 })
 .state('home.contacts', {
   url: '/contacts',

@@ -3,13 +3,13 @@
           <h2 class="form-signin-heading">Please sign up</h2>
           <label for="inputEmail" class="sr-only">Email address</label>
           <br>
-          <input type="email" id="inputEmail" class="form-control" placeholder="Email address" required="" autofocus="">
+          <input ng-model="formDataS.email" type="email" id="inputEmail" class="form-control" placeholder="Email address" required="" autofocus="">
           <br>
           <label for="inputPassword" class="sr-only">Password</label>
           <br>
-          <input type="password" id="inputPassword" class="form-control" placeholder="Password" required="">
+          <input ng-model="formDataS.password" type="password" id="inputPassword" class="form-control" placeholder="Password" required="">
           <br>
-        
-          <button class="btn btn-lg btn-success btn-block" type="submit">Sign up</button>
+
+          <button ng-click="Signup()" class="btn btn-lg btn-success btn-block" type="submit">Sign up</button>
   </form>
 </div>

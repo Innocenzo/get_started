@@ -13,13 +13,20 @@ module.exports = function() {
   });
 
   passport.deserializeUser(function(id, done) {
-    models.User.findById(id, function(err, user) {
-      done(err, user);
+    console.log('session',id);
+    models.User.findById(id)
+    .then(function(user) {
+      done(null, user);
+    })
+    .catch(function(err) {
+      done(err);
     });
+
   });
 
   passport.use("login", new LocalStrategy(function(username, password, done) {
     console.log(username+password);
+    console.log('nome');
     models.User.findOne({where:{ username: username }}).then(function(user) {
               var checkPassword = function(guess, done) {
                 console.log(guess +"User.checkPassword"+"   "+user.dataValues.password);
@@ -48,21 +55,6 @@ module.exports = function() {
          console.log("ops1: " + error);
          res.status(500).json({ error: 'error' });
        });
-    // models.User.findOne({where:{ username: username }}, function(err, user) {
-    //   console.log("login");
-    //   if (err) { return done(err); }
-    //   if (!user) {
-    //     return done(null, false, { message: "No user has that username!" });
-    //   }
-    //   models.User.checkPassword(password, function(err, isMatch) {
-    //     if (err) { return done(err); }
-    //     if (isMatch) {
-    //       return done(null, user);
-    //     } else {
-    //       return done(null, false, { message: "Invalid password." });
-    //     }
-    //   });
-    // });
   }));
 
 };

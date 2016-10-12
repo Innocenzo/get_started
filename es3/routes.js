@@ -64,19 +64,27 @@ router.delete("/api/contacts/:id", function(req, res) {
 });
 });
 
-router.get("/logout", function(req, res) {
+router.get("/api/logout", function(req, res) {
+  console.log('ok');
 req.logout();
 res.redirect("/");
 });
 
 
 router.post("/api/login", function(req, res, next) {
+  console.log('one');
   passport.authenticate('login', function(err, user, info) {
-    if (err) { return next(err); }
-    if (!user) { return res.redirect('/login'); }
+    console.log('two');
+    if (err) {
+      console.log('err1',err);
+      return next(err); }
+    if (!user) {
+      console.log('err2',err);
+      return res.redirect('/login'); }
+    console.log(user+"login");
     req.logIn(user, function(err) {
       if (err) { return next(err); }
-      res.json(user.username+"  "+ user.uuid);
+      res.json(user);
       // return res.redirect('/users/' + user.username);
     });
   })(req, res, next);
@@ -104,12 +112,11 @@ router.post("/api/signup", function(req, res) {
                 }).then(function(contact){
                   console.log(req.body);
                   // console.log(contact.dataValues);
-                  res.json(contact);
+                  return res.redirect("/");
                 }).catch(function(error){
-                  console.log("ops2: " + error);
+                  console.log("ops: " + error);
                   res.status(500).json({ error: 'error' });
                 });
-                //done();
                 });
                 });
 
