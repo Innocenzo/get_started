@@ -76,36 +76,57 @@ state('signup', {
 state('login', {
   url: '/login',
   templateUrl: 'partial-login.html',
-  controller : ['$scope','Login','$location',
-  function LoginController($scope,Login,$location) {
+  controller : ['$scope','Login','$location','UpdateContact',
+  function LoginController($scope,Login,$location,UpdateContact) {
     $scope.Login = function () {
       var data = {
         username:  $scope.formDataL.email,
         password:  $scope.formDataL.password
       };
       console.log(data);
-      return    Login
-                      .save(data)
-                      .$promise
-                      .then(function(res){
-                        console.log('login ok');
-                        console.log(res);
-                        var urlUser = res.uuid;
-                        console.log(urlUser);
-                        $location.path(urlUser);
-                        //res.redirect("/");
-                        // $scope.contacts.push(res);
-                      }).catch(function(response) {
-                        console.error('Gists error', response, response.data);
-                      });
+      Login
+          .save(data)
+          .$promise
+          .then(function(res){
+            console.log('login ok');
+            console.log(res);
+            var urlUser ='/home/contacts/'+res.uuid;
+            console.log(urlUser);
+             $location.path(urlUser);
+
+          })
+          .catch(function(response) {
+            console.error('Gists error', response, response.data);
+          });
+                  // Login
+                  //     .save(data)
+                  //     .$promise
+                  //     .then(function(res){
+                  //       console.log('login ok');
+                  //       console.log(res);
+                  //       var urlUser = res.uuid;
+                  //       console.log(urlUser);
+                  //
+                  //       return UpdateContact
+                  //                   .query({id:res.uuid})
+                  //                   .$promise;
+                  //     })
+                  //     .then(function(res){
+                  //       console.log(res[0],'query');
+                  //       $scope.contacts = res[0];
+                  //       // $location.path('/home/contacts');
+                  //     })
+                  //     .catch(function(response) {
+                  //       console.error('Gists error', response, response.data);
+                  //     });
     };
   }]
 })
 .state('home.contacts', {
-  url: '/contacts',
+  url: '/contacts/:uuid',
   templateUrl: 'partial-home-list.html',
-  controller: ['$scope',"UpdateContact",
-  function ContactListController($scope,UpdateContact) {
+  controller: ['$scope',"UpdateContact","$stateParams",
+  function ContactListController($scope,UpdateContact,$stateParams) {
     $scope.orderProp = "id";
     // we will store all of our form data in this object
     $scope.formData = {};
@@ -129,7 +150,7 @@ state('login', {
     };
 
     UpdateContact
-              .query()
+              .query({id:$stateParams.uuid})
               .$promise
               .then(function(res){
                 console.log(res);

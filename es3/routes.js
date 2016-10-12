@@ -8,9 +8,16 @@ var SALT_FACTOR = 10;
 
 var router = express.Router();
 
-router.get("/api/contacts", function(req, res) {
-  models.Contact.findAll().then(function(contacts){
+router.get("/api/contacts/:id", function(req, res) {
+  // models.Contact.findAll().then(function(contacts){
+  //   res.json(contacts);
+  // });
+  console.log(req.params.id);
+  models.Contact.findAll({where:{ uuid: req.params.id }}).then(function(contacts) {
     res.json(contacts);
+  }).catch(function(error){
+    console.log("ops: " + error);
+    res.status(500).json({ error: 'error' });
   });
 });
 
