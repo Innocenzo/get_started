@@ -38,7 +38,7 @@
               <th><input class="form-control" type="text" placeholder="First Name" ng-model="formData.name"></th>
               <th><input class="form-control" type="text" placeholder="Last Name" ng-model="formData.surname"></th>
               <th><input class="form-control" type="text" placeholder="1-(555)-555-5555" ng-model="formData.tel"></th>
-              <th><button type="submit" class="btn btn-primary btn-lg btn-block" ng-click="SendData()">Add Contact</button></th>
+              <th><button type="submit" class="btn btn-primary btn-lg btn-block" ng-click="SendData(uuid)">Add Contact</button></th>
             </form>
             {{formData}}
           </tr>
@@ -48,8 +48,9 @@
             <td>{{contact.surname}}</td>
             <td>{{contact.tel}}</td>
             <td>
-              <a ui-sref="home.contact({ ID: {{contact.id}} })" class="btn btn-success">Update</a>
-              <button ng-click="RemoveId(contact.id)" type="button" class="btn btn-danger">Remove</button>
+              <!-- <a ui-sref="home.contact({ ID: {{contact.id}} })" class="btn btn-success">Update</a> -->
+              <button ui-sref="home.contact({ ID: {{contact.id}} })" type="button" class="btn btn-success">Update</button>
+              <button ng-click="RemoveId(contact.id,uuid)" type="button" class="btn btn-danger">Remove</button>
             </td>
           </tr>
           <div ui-view></div>

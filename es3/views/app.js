@@ -130,12 +130,13 @@ state('login', {
     $scope.orderProp = "id";
     // we will store all of our form data in this object
     $scope.formData = {};
-    $scope.SendData = function () {
-
+    $scope.SendData = function (uuid) {
+      console.log(uuid,'uuid SendData');
       var data = {
         name1:    $scope.formData.name,
         surname:  $scope.formData.surname,
-        tel:      $scope.formData.tel
+        tel:      $scope.formData.tel,
+        uuid:     uuid
       };
       console.log(data);
       return UpdateContact
@@ -153,27 +154,27 @@ state('login', {
               .query({id:$stateParams.uuid})
               .$promise
               .then(function(res){
-                console.log(res);
+                console.log(res,'UpdateContact query');
                 $scope.contacts = res;
+                $scope.uuid=$stateParams.uuid;
               }).catch(function(response) {
                 console.error('Gists error', response, response.data);
               });
-$scope.RemoveId = function (id) {
+$scope.RemoveId = function (id,uuid) {
                 console.log(id);
                 UpdateContact.remove({id:id})
                               .$promise
                               .then(function(res){
-                                console.log(JSON.stringify(res)+"update response");
+                                console.log(JSON.stringify(res)+"update remove");
                                 return UpdateContact
-                                                  .query()
-                                                  .$promise
-                                                  .then(function(res){
-                                                    console.log(res);
-                                                    $scope.contacts = res;
-                                                  }).catch(function(response) {
-                                                    console.error('Gists error', response, response.data);
-                                                  });
-                              }).catch(function(response) {
+                                                  .query({id:uuid})
+                                                  .$promise;
+
+                              }).then(function(res){
+                                console.log(res);
+                                $scope.contacts = res;
+                              })
+                              .catch(function(response) {
                                 console.error('Gists error', response, response.data);
                               });
               };

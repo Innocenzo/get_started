@@ -26,7 +26,8 @@ router.post("/api/contacts", function(req, res) {
   models.Contact.create({
     name: req.body.name1,
     surname: req.body.surname,
-    tel: req.body.tel
+    tel: req.body.tel,
+    uuid: req.body.uuid
   }).then(function(contact){
     console.log(req.body+"hhfhjfjhfhjfhfhj");
     console.log(contact.dataValues);
