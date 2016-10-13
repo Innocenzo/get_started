@@ -1,7 +1,7 @@
 var routerApp = angular.module('es2', ['ui.router','ngResource']);
 
 routerApp.factory('UpdateContact',['$resource', function($resource) {
-return $resource('/api/contacts/:id', {id: '@id'}, {
+return $resource('/api/contacts/:id/:uuid', {id: '@id',uuid:'@uuid'}, {
   update: {
     method: 'PUT'
   }
@@ -95,7 +95,7 @@ state('login', {
           .catch(function(response) {
             console.error('Gists error', response, response.data);
           });
-  
+
     };
   }]
 })
@@ -139,7 +139,7 @@ state('login', {
               });
 $scope.RemoveId = function (id,uuid) {
                 console.log(id);
-                UpdateContact.remove({id:id})
+                UpdateContact.remove({id:id,uuid:uuid})
                               .$promise
                               .then(function(res){
                                 console.log(JSON.stringify(res)+"update remove");
@@ -160,33 +160,28 @@ $scope.RemoveId = function (id,uuid) {
 })
 
 .state('home.contact', {
-  url: '/contact/:ID',
+  url: '/contact/:ID/:UUID',
   templateUrl: 'partial-update.html',
-  controller: ['$scope','$stateParams','UpdateContact',
-  function UpdateContactController($scope,$stateParams,UpdateContact) {
+  controller: ['$scope','$stateParams','UpdateContact','$location',
+  function UpdateContactController($scope,$stateParams,UpdateContact,$location) {
     $scope.UpdateId = function () {
       var id = $stateParams.ID;
       var data = {
         id: $stateParams.ID,
-        name:    $scope.formDataU.name,
+        name:     $scope.formDataU.name,
         surname:  $scope.formDataU.surname,
-        tel:      $scope.formDataU.tel
+        tel:      $scope.formDataU.tel,
+        uuid:     $stateParams.UUID
       };
       console.log(id);
       console.log(data);
       UpdateContact.update(data)
                     .$promise
                     .then(function(res){
-                      console.log(JSON.stringify(res)+"update response");
-                      return UpdateContact
-                                        .query()
-                                        .$promise
-                                        .then(function(res){
-                                          console.log(res);
-                                          $scope.contacts = res;
-                                        }).catch(function(response) {
-                                          console.error('Gists error', response, response.data);
-                                        });
+                      console.log("update response");
+                      var urlUser ='/home/contacts/'+$stateParams.UUID;
+                      console.log(urlUser);
+                       $location.path(urlUser);
                     }).catch(function(response) {
                       console.error('Gists error', response, response.data);
                     });
