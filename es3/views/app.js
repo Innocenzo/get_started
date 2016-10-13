@@ -17,6 +17,40 @@ routerApp.factory('Logout',['$resource', function($resource) {
 return $resource('/api/logout');
 }]);
 
+// routerApp.factory('AuthService',[
+//   '$resource','SessionService','Login',
+//   function($resource,SessionService,Login) {
+//     var AuthService = {
+//
+//       login: function(callback) {
+//         $http({ method: 'GET', url: '/users/me' })
+//
+//         // User Successfully Authenticates
+//         .success(function(data, status, headers, config) {
+//           SessionService.authenticated = true;
+//           SessionService.user = data;
+//           if (typeof(callback) === typeof(Function)) callback();
+//         })
+//
+//         // Not logged in
+//         .error(function(data, status, headers, config) {
+//           console.log('Error authenticating');
+//           SessionService.authenticated = false;
+//           if (typeof(callback) === typeof(Function)) callback();
+//         });
+//       }
+//     };
+//
+//     return AuthService;
+//
+// }])
+// .factory('SessionService', function() {
+//   return {
+//     user: null,
+//     authenticated: false
+//   };
+// });
+
 routerApp.config(function($stateProvider, $urlRouterProvider) {
 
 $urlRouterProvider.otherwise('/home');

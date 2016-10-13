@@ -6,6 +6,7 @@ var passport = require("passport");
 var path = require("path");
 var session = require("express-session");
 var http = require('http');
+var logger = require('morgan');
 
 var setUpPassport = require("./setuppassport");
 
@@ -17,6 +18,7 @@ var app = express();
 setUpPassport();
 
 app.set('port', process.env.PORT || 3000);
+app.use(logger('dev'));
 
 // configure app
 app.use(express.static(path.join(__dirname, "public")));
