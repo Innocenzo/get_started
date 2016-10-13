@@ -17,40 +17,6 @@ routerApp.factory('Logout',['$resource', function($resource) {
 return $resource('/api/logout');
 }]);
 
-// routerApp.factory('AuthService',[
-//   '$resource','SessionService','Login',
-//   function($resource,SessionService,Login) {
-//     var AuthService = {
-//
-//       login: function(callback) {
-//         $http({ method: 'GET', url: '/users/me' })
-//
-//         // User Successfully Authenticates
-//         .success(function(data, status, headers, config) {
-//           SessionService.authenticated = true;
-//           SessionService.user = data;
-//           if (typeof(callback) === typeof(Function)) callback();
-//         })
-//
-//         // Not logged in
-//         .error(function(data, status, headers, config) {
-//           console.log('Error authenticating');
-//           SessionService.authenticated = false;
-//           if (typeof(callback) === typeof(Function)) callback();
-//         });
-//       }
-//     };
-//
-//     return AuthService;
-//
-// }])
-// .factory('SessionService', function() {
-//   return {
-//     user: null,
-//     authenticated: false
-//   };
-// });
-
 routerApp.config(function($stateProvider, $urlRouterProvider) {
 
 $urlRouterProvider.otherwise('/home');
@@ -74,8 +40,7 @@ $stateProvider
                         console.log('logout ok');
                         console.log(res);
                         $location.path('/');
-                        //res.redirect("/");
-                        // $scope.contacts.push(res);
+
                       }).catch(function(response) {
                         console.error('Gists error', response, response.data);
                       });
@@ -99,8 +64,6 @@ state('signup', {
                       .then(function(res){
                         console.log("signup OK");
                         $location.path('/');
-                        // res.redirect("/");
-                        // $scope.contacts.push(res);
                       }).catch(function(response) {
                         console.error('Gists error', response, response.data);
                       });
@@ -132,27 +95,7 @@ state('login', {
           .catch(function(response) {
             console.error('Gists error', response, response.data);
           });
-                  // Login
-                  //     .save(data)
-                  //     .$promise
-                  //     .then(function(res){
-                  //       console.log('login ok');
-                  //       console.log(res);
-                  //       var urlUser = res.uuid;
-                  //       console.log(urlUser);
-                  //
-                  //       return UpdateContact
-                  //                   .query({id:res.uuid})
-                  //                   .$promise;
-                  //     })
-                  //     .then(function(res){
-                  //       console.log(res[0],'query');
-                  //       $scope.contacts = res[0];
-                  //       // $location.path('/home/contacts');
-                  //     })
-                  //     .catch(function(response) {
-                  //       console.error('Gists error', response, response.data);
-                  //     });
+  
     };
   }]
 })
