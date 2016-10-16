@@ -126,7 +126,7 @@ state('login', {
                         console.error('Gists error', response, response.data);
                       });
     };
-
+    console.log('count');
     UpdateContact
               .query({id:$stateParams.uuid})
               .$promise

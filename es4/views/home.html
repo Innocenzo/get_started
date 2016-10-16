@@ -3,11 +3,33 @@
 </div>
 <div class="container-fluid">
   <div class="row">
-    <div class="col-md-2">
-      <!-- Sidebar content -->
+    <div class="col-md-4">
+    <!-- <form>
+      <select ng-model="data.multipleSelect" >
+        <option ng-repeat="usr in users"  value="{{usr.id}}">{{usr.id}}</option>
+      </select>
+      </form> -->
+      <table class="table table-bordered">
+        <thead>
+          <tr>
+            <th>#</th>
+            <th>Name</th>
+          </tr>
+        </thead>
+        <tbody>
 
+          <tr ng-repeat="usr in users">
+            <th scope="row">
+              <input type="checkbox" ng-model="data.multipleSelect" ng-true-value={{usr.id}} ng-false-value=0>
+            </th>
+
+            <td>{{usr.id}}</td>
+          </tr>
+        </tbody>
+      </table>
+      {{data.multipleSelect}}
     </div>
-    <div class="col-md-10">
+    <div class="col-md-8">
 
       <table class="table table-bordered">
         <thead>
@@ -18,24 +40,24 @@
           </tr>
         </thead>
         <tbody>
-          <tr>
+          <tr ng-repeat="msg in msgs">
             <th scope="row"></th>
-            <td></td>
-            <td></td>
+            <td>{{msg.id}}</td>
+            <td>{{msg.msg}}</td>
           </tr>
           <tr>
             <th>#</th>
             <td></td>
             <!-- use ng-submit to catch the form submission and use our Angular function -->
             <form >
-              <th><input class="form-control" type="text" placeholder="Message" ></th>
-              <th><button type="submit" class="btn btn-primary btn-lg btn-block" >Send</button></th>
+              <th><input  ng-model="formMsg.msg" class="form-control" type="text" placeholder="Message"></th>
+              <th><button ng-click="SendMsg()" type="submit" class="btn btn-primary btn-lg btn-block" >Send</button></th>
             </form>
-            {{formData}}
           </tr>
         </tbody>
       </table>
 
 
+    </div>
     </div>
   </div>
