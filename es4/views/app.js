@@ -33,10 +33,11 @@ $stateProvider
       for (var variable in user) {
         if (user.hasOwnProperty(variable)) {
           console.log(variable);
-          $scope.$apply(function() {
-                $scope.users.push({id:variable});
-              });
-
+          // $scope.$apply(function() {
+          //
+          //     });
+              $scope.users.push({id:variable});
+              $scope.$apply();
         }
       }
       // $scope.msgs=[];
@@ -44,10 +45,12 @@ $stateProvider
 
     socket.on('chat message', function(msg,id){
       console.log(msg,'response server');
-      $scope.$apply(function() {
-            $scope.msgs.push({msg:msg.msg,id:id});
-          });
+      // $scope.$apply(function() {
+      //
+      //     });
+      $scope.msgs.push({msg:msg.msg,id:id});
       // $scope.msgs=[];
+      $scope.$apply();
     });
   }]
 });

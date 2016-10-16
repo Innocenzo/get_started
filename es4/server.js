@@ -25,6 +25,11 @@ app.use(bodyParser());
 
 var id={};
 io.on('connection', function(socket){
+   socket.on('disconnect', function(){
+      console.log(socket.id,'disconnected');
+      delete id[socket.id];
+      io.emit('users', id);
+   });
 
   // console.log(socket,"connessione");
   // console.log(socket.adapter,"connessione");
