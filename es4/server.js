@@ -25,44 +25,38 @@ app.use(bodyParser());
 
 var id={};
 io.on('connection', function(socket){
+  // console.log(socket);
    socket.on('disconnect', function(){
       console.log(socket.id,'disconnected');
       delete id[socket.id];
       io.emit('users', id);
    });
+   socket.on('users', function(name){
+      id[socket.id]=name;
+      io.emit('users', id);
+      console.log(id,"inserimento nome");
+   });
+   if (!Object.keys(id)[socket.id]) {
+     id[socket.id]="";
+     console.log('nome null');
+   }
 
-  // console.log(socket,"connessione");
-  // console.log(socket.adapter,"connessione");
-  id[socket.id]=1;
-  // for (var variable in id) {
-  //   if (id.hasOwnProperty(variable)) {
-  //     console.log(variable);
-  //   }
-  // }
   console.log(id);
   io.emit('users', id);
+
   socket.on('chat message', function(msg){
-    // if (msg.to) {
-    //   io.to(msg.to).emit('chat priva', msg);
-    //
-    // }
+    var user={id:socket.id, name:id[socket.id]};
+      console.log(user,"user name");
     if (msg.multipleSelect !== '0') {
       console.log('true');
       io.to(msg.multipleSelect).emit('chat message', msg,socket.id);
-      io.to(socket.id).emit('chat message', msg,socket.id);
+      io.to(socket.id).emit('chat message', msg,user);
       console.log('from',socket.id,msg);
     } else {
       console.log('false');
-      io.emit('chat message', msg,socket.id);
+      io.emit('chat message', msg,user);
       console.log(socket.id,msg);
     }
-
-
-    // io.emit('chat message',socket.id);
-    // console.log(id);
-    // if (id[0] == socket.id) {
-    //   io.to(id[1]).emit('chat message', msg);
-    // }
   });
 });
 

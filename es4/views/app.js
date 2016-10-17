@@ -27,6 +27,11 @@ $stateProvider
       socket.emit('chat message', to);
 
     };
+    $scope.SendName = function () {
+      console.log($scope.formName.name);
+      socket.emit('users', $scope.formName.name);
+      $scope.formName.name=null;
+    };
     socket.on('users', function(user){
       $scope.users=[];
       console.log(user,'response server');
@@ -36,19 +41,20 @@ $stateProvider
           // $scope.$apply(function() {
           //
           //     });
-              $scope.users.push({id:variable});
+              $scope.users.push({id:variable,name:user[variable]});
               $scope.$apply();
         }
       }
       // $scope.msgs=[];
     });
 
-    socket.on('chat message', function(msg,id){
+    socket.on('chat message', function(msg,user){
       console.log(msg,'response server');
+      console.log(user,"id user");
       // $scope.$apply(function() {
       //
       //     });
-      $scope.msgs.push({msg:msg.msg,id:id});
+      $scope.msgs.push({msg:msg.msg,id:user.id,name:user.name});
       // $scope.msgs=[];
       $scope.$apply();
     });

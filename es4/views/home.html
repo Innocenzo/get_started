@@ -13,6 +13,13 @@
         <thead>
           <tr>
             <th>#</th>
+            <form >
+              <th><input  ng-model="formName.name" class="form-control" type="text" placeholder="Name"></th>
+              <th><button ng-click="SendName()" type="submit" class="btn btn-primary btn-lg btn-block" >Send</button></th>
+            </form>
+          </tr>
+          <tr>
+            <th>#</th>
             <th>Name</th>
           </tr>
         </thead>
@@ -23,7 +30,7 @@
               <input type="checkbox" ng-model="data.multipleSelect" ng-true-value={{usr.id}} ng-false-value=0>
             </th>
 
-            <td>{{usr.id}}</td>
+            <td>{{usr.name!=="" ? usr.name : usr.id }}</td>
           </tr>
         </tbody>
       </table>
@@ -42,7 +49,7 @@
         <tbody>
           <tr ng-repeat="msg in msgs">
             <th scope="row"></th>
-            <td>{{msg.id}}</td>
+            <td>{{msg.name!=="" ? msg.name : msg.id }}</td>
             <td>{{msg.msg}}</td>
           </tr>
           <tr>
