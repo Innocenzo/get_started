@@ -19,16 +19,16 @@
             </form>
           </tr>
           <tr>
-            <th>#</th>
-            <th>Current Name</th>
+            <th style="color:red;">#</th>
+            <th style="color:red;">Current Name</th>
           </tr>
           <tr>
-            <th>#</th>
-            <th>{{me + currentUsr}}</th>
+            <th style="color:red;">#</th>
+            <th style="color:red;">{{me}}</th>
           </tr>
           <tr>
-            <th>#</th>
-            <th>User Online</th>
+            <th style="color:green;">#</th>
+            <th style="color:green;">User Online</th>
           </tr>
         </thead>
         <tbody>
@@ -38,7 +38,7 @@
               <input type="checkbox" ng-model="data.multipleSelect" ng-true-value={{usr.id}} ng-false-value=0>
             </th>
 
-            <td>{{usr.name!=="" ? usr.name : usr.id }}</td>
+            <td style="color:green;">{{usr.name!=="" ? usr.name : usr.id }}</td>
           </tr>
         </tbody>
       </table>
