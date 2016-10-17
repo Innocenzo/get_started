@@ -29,27 +29,28 @@ io.on('connection', function(socket){
    socket.on('disconnect', function(){
       console.log(socket.id,'disconnected');
       delete id[socket.id];
-      io.emit('users', id);
+      io.emit('users', id,socket.id);
    });
+   //riceve il nome
    socket.on('users', function(name){
       id[socket.id]=name;
-      io.emit('users', id);
+      io.emit('users', id,socket.id);
       console.log(id,"inserimento nome");
    });
    if (!Object.keys(id)[socket.id]) {
      id[socket.id]="";
      console.log('nome null');
    }
-
+   console.log(Object.keys(id)[socket.id],"key");
   console.log(id);
-  io.emit('users', id);
+  io.emit('users', id,socket.id);
 
   socket.on('chat message', function(msg){
     var user={id:socket.id, name:id[socket.id]};
       console.log(user,"user name");
     if (msg.multipleSelect !== '0') {
       console.log('true');
-      io.to(msg.multipleSelect).emit('chat message', msg,socket.id);
+      io.to(msg.multipleSelect).emit('chat message', msg,user);
       io.to(socket.id).emit('chat message', msg,user);
       console.log('from',socket.id,msg);
     } else {
